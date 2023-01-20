@@ -1,3 +1,5 @@
+# Written by Dylan Kenneth Eliot
+
 __all__=['wget', 'Github_import', 'Git_import']
 
 wget=__import__("requests").get
