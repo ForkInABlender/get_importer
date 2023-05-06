@@ -1,2 +1,2 @@
 def my_function(args):
-  print(args)
+  retunr args
