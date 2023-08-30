@@ -1,0 +1,35 @@
+from browser import ajax, document
+
+BASE_URL = "https://raw.githubusercontent.com"
+
+def custom_import(name, globals=None, locals=None, fromlist=(), level=0):
+    if level > 0:  # Relative import
+        # Calculate the absolute path based on 'name' and 'level'
+        # This logic might need adjustments based on the specific module structure
+        parts = globals['__name__'].split('.')[:-level] + [name]
+        abs_name = '.'.join(parts)
+        
+        # Fetch the module from GitHub
+        content = Github_import_sync("username", "repo_name", "branch_name", f"path_to_module/{abs_name}.py")
+        exec(content, globals)
+        return globals[name]
+    else:
+        # For non-relative imports, use the default import mechanism
+        return original_import(name, globals, locals, fromlist, level)
+
+original_import = __builtins__.__import__
+__builtins__.__import__ = custom_import
+
+def wget(url):
+    req = ajax.Ajax()
+    req.open('GET', url, False)  # Synchronous request
+    req.send()
+    return req
+
+def Github_import_sync(username, repo, branch, path_to_module):
+    url = f"{BASE_URL}/{username}/{repo}/{branch}/{path_to_module}"
+    req = wget(url)
+    if req.status == 200 or req.status == 0:
+        return req.text
+    else:
+        raise ImportError(f"Error {req.status}: {req.text}")
