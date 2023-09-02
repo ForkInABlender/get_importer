@@ -1,2 +1,2 @@
 # get_importer
-For when you want to keep your python code on the web as it runs from your localhost machines
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For when you want to keep your python code for the web as it would run from your localhost machines, or even in the browser on many machines. Whatever the use case may be, It is important to remember that setting it up this way means that it has no ``__file__`` attribute. So, you'll need to implement that so as to point it to the right place. This will reduce confusion and issues due to the module having no actual file but instead a module object handle because the actual file was loaded off of a github repository.
