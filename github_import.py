@@ -1,7 +1,5 @@
 # Written by Dylan Kenneth Eliot
 
-__all__=['wget', 'Github_import', 'Git_import', 'Github_import2', 'Git_import2']
-
 """
 if importing the normal way does not work as expected, use the Git_import2 instead.
 
