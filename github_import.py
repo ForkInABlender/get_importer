@@ -1,8 +1,15 @@
 # Written by Dylan Kenneth Eliot
+from browser import ajax
 
 __all__=['wget', 'Github_import', 'Git_import']
 
-wget=__import__("requests").get
+
+def wget(url):
+    req = ajax.Ajax()
+    req.open('GET', url, False)  # Synchronous request
+    req.send()
+    return req
+
 def Github_import(username, repo, branch, path_to_module):
   global wget
   return eval(repr(wget("https://raw.githubusercontent.com/"+username+"/"+repo+"/"+branch+"/"+path_to_module).text))
